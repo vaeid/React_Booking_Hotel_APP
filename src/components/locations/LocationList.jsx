@@ -9,7 +9,6 @@ export default function LocationList() {
       <h2> Nearby Locations</h2>
       <div className='locationList'>
         {data.map((item) => {
-          console.log(item);
           return (
             <div className='locationItem' key={item.id}>
               <img src='/assets/img/images.jpg' alt={item.name} />
