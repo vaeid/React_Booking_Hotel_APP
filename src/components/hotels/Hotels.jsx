@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import Loader from '../loader/Loader';
 import { useHotels } from '../context/HotelsProvider';
 
@@ -11,7 +10,7 @@ export default function Hotels() {
       <h2>search result( {hotels.length})</h2>
       {hotels.map((item) => {
         return (
-          <Link key={item.id} to={`/hotels/${item.id}?lat=${item.lat}&?lng=${item.lng}`}>
+          <Link key={item.id} to={`/hotels/${item.id}?lat=${item.latitude}&lng=${item.longitude}`}>
             <div className='searchItem'>
               <img src='/assets/img/images.jpg' alt={item.name} />
               <div className='searchItemDesc'>

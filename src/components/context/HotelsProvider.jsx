@@ -1,8 +1,9 @@
 import { createContext, useContext } from 'react';
 import useFetch from '../../hooks/useFetch';
 import { useSearchParams } from 'react-router-dom';
-import Hotels from '../hotels/Hotels';
+
 const hotelContext = createContext();
+
 export default function HotelsProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get('destination');
@@ -13,6 +14,7 @@ export default function HotelsProvider({ children }) {
   );
   return <hotelContext.Provider value={{ isLoading, hotels }}>{children}</hotelContext.Provider>;
 }
+
 export function useHotels() {
   return useContext(hotelContext);
 }
