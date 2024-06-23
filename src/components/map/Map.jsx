@@ -1,54 +1,57 @@
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
-import { useHotels } from '../context/HotelsProvider';
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from 'react-leaflet';
 import { useEffect, useState } from 'react';
-import Loader from '../loader/Loader';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useGeoLocation from '../../hooks/useGeoLocation';
-import { HiLocationMarker } from 'react-icons/hi';
+import useUrlLocation from '../../hooks/useUrlLocation';
 
-export default function Map() {
-  const { isLoading, hotels } = useHotels();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [mapCenter, setMapCenter] = useState([52.36, 4.86]);
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
-  const { isLoading: isLoadingPosition, position: geoPosition, getPosition, isError } = useGeoLocation();
-  if (isLoading) return <Loader />;
+function Map({ markerLocations }) {
+  const [mapCenter, setMapCenter] = useState([20, 4]);
+  const [lat, lng] = useUrlLocation();
+  const { isLoading: isLoadingPosition, position: geoLocationPosition, getPosition } = useGeoLocation();
+
   useEffect(() => {
     if (lat && lng) setMapCenter([lat, lng]);
   }, [lat, lng]);
+
   useEffect(() => {
-    if (geoPosition?.lat) {
-      setMapCenter([geoPosition.lat, geoPosition.lng]);
-    }
-  }, [geoPosition]);
+    if (geoLocationPosition?.lat && geoLocationPosition?.lng)
+      setMapCenter([geoLocationPosition.lat, geoLocationPosition.lng]);
+  }, [geoLocationPosition]);
 
   return (
     <div className='mapContainer'>
-      <MapContainer className='map' center={mapCenter} zoom={15} scrollWheelZoom={true}>
-        <button className='getLocation' onClick={getPosition}>
-          {isLoadingPosition ? 'loading...' : <HiLocationMarker />}
+      <MapContainer className='map' center={mapCenter} zoom={6} scrollWheelZoom={true}>
+        <button onClick={getPosition} className='getLocation'>
+          {isLoadingPosition ? 'Loading ...' : ' Use Your Location'}
         </button>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
         />
-        {lat && lng && <ChangeCenter position={mapCenter} />}
-
-        {hotels.map((item) => (
+        <DetectClick />
+        <ChangeCenter position={mapCenter} />
+        {markerLocations.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
-            <Popup>
-              <h4>{item.name}</h4>
-              <p>{item.description}</p>
-            </Popup>
+            <Popup>{item.host_location}</Popup>
           </Marker>
         ))}
       </MapContainer>
     </div>
   );
 }
+export default Map;
+
 function ChangeCenter({ position }) {
   const map = useMap();
   map.setView(position);
+  map.setZoom(16);
+  return null;
+}
+
+function DetectClick() {
+  const navigate = useNavigate();
+  useMapEvent({
+    click: (e) => navigate(`/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+  });
   return null;
 }

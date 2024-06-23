@@ -5,7 +5,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 const hotelContext = createContext();
-const BASE_URL = 'http://localhost:5000/hotels';
+const BASE_URL = 'http://localhost:5000';
 
 export default function HotelsProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,11 +13,14 @@ export default function HotelsProvider({ children }) {
   const [isLoadCurrentHotel, setIsLoadCurrentHotel] = useState(false);
   const destination = searchParams.get('destination');
   const room = JSON.parse(searchParams.get('options'))?.room;
-  const { data: hotels, isLoading } = useFetch(BASE_URL, `q=${destination || ''}&accommodates_gte=${room || 1}`);
+  const { data: hotels, isLoading } = useFetch(
+    BASE_URL + '/hotels',
+    `q=${destination || ''}&accommodates_gte=${room || 1}`
+  );
   async function getSingleHotel(id) {
     setIsLoadCurrentHotel(true);
     try {
-      const { data } = await axios.get(`${BASE_URL}/${id}`);
+      const { data } = await axios.get(`${BASE_URL}/hotels/${id}`);
       setCurrentHotel(data);
       setIsLoadCurrentHotel(false);
     } catch (error) {
