@@ -44,7 +44,7 @@ export default Map;
 function ChangeCenter({ position }) {
   const map = useMap();
   map.setView(position);
-  map.setZoom(16);
+  map.setZoom(14);
   return null;
 }
 

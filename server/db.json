@@ -1325,49 +1325,40 @@
   ],
   "bookmarks": [
     {
-      "cityName": "Shiraz",
- "country": "Iran (Islamic Republic of)",
+      "cityName": "Yasuj",
+      "country": "Iran (Islamic Republic of)",
       "countryCode": "IR",
-      "latitude": "29.63138515527129",
-      "longitude": "52.51992337240488",
-      "host_location": "Abalessa Algeria",
+      "latitude": "30.656841900839346",
+      "longitude": "51.60026339350297",
+      "host_location": "Yasuj Iran (Islamic Republic of)",
       "id": 1
     },
     {
-      "cityName": "Mahidasht",
+      "cityName": "Shiraz",
       "country": "Iran (Islamic Republic of)",
       "countryCode": "IR",
-      "latitude": "34.32869425037187",
-      "longitude": "46.724183117022086",
-      "host_location": "Mahidasht Iran (Islamic Republic of)",
-      "id": 4
+      "latitude": "29.631408119451034",
+      "longitude": "52.51993387003485",
+      "host_location": "Shiraz Iran (Islamic Republic of)",
+      "id": 2
     },
     {
-      "cityName": "Sanandaj",
+      "cityName": "Bushehr",
       "country": "Iran (Islamic Republic of)",
       "countryCode": "IR",
-      "latitude": "35.31372444726279",
-      "longitude": "47.03114358752335",
-      "host_location": "Sanandaj Iran (Islamic Republic of)",
+      "latitude": "28.939085630444563",
+      "longitude": "50.82761952126478",
+      "host_location": "Bushehr Iran (Islamic Republic of)",
       "id": 5
     },
     {
-      "cityName": "A Dakhla Oasis",
-      "country": "Egypt",
-      "countryCode": "EG",
-      "latitude": "25.02090651422749",
-      "longitude": "29.09059588509316",
-      "host_location": "A Dakhla Oasis Egypt",
-      "id": 7
-    },
-    {
-      "cityName": "Baba Kot",
-      "country": "Pakistan",
-      "countryCode": "PK",
-      "latitude": "28.43528783183169",
-      "longitude": "67.78003711374224",
-      "host_location": "Baba Kot Pakistan",
-      "id": 8
+      "cityName": "Sepidan",
+      "country": "Iran (Islamic Republic of)",
+      "countryCode": "IR",
+      "latitude": "30.261777019091475",
+      "longitude": "51.98402826826181",
+      "host_location": "Sepidan Iran (Islamic Republic of)",
+      "id": 6
     }
   ]
 }
